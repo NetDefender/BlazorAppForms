@@ -1,0 +1,32 @@
+﻿<h1>Locations</h1>
+
+@if(_locations == null)
+{
+    <h3>Loading Locations...</h3>
+}
+else
+{
+    @foreach(CustomerLocationTransport location in _locations)
+    {
+        <div class="form-group row">
+            <label for="name" class="col-md-2 col-form-label">Street:</label>
+            <div class="col-md-10">
+                <InputText id="@("street_" + location.IdCustomerLocation)" class="form-control" @bind-Value="location.Street" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="name" class="col-md-2 col-form-label">Portal:</label>
+            <div class="col-md-10">
+                <InputNumber id="@("portal_" + location.IdCustomerLocation)" class="form-control" @bind-Value="location.Portal" />
+            </div>
+        </div>
+
+            <div class="row">
+            <div class="col-md-12 text-right">
+                <button type="button" class="btn btn-success" @onclick="@(() => Update(location))">@("Actualizar")</button>
+            </div>
+        </div>
+        <hr />
+    }
+}

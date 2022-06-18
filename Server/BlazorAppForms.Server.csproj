@@ -18,5 +18,9 @@
     <ProjectReference Include="..\Shared\BlazorAppForms.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Files\" />
+  </ItemGroup>
+
 
 </Project>

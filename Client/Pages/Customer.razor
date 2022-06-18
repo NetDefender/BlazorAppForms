@@ -1,4 +1,4 @@
-﻿@page "/customer"
+﻿@page "/customer/{IdCustomer:int}"
 
 @inject HttpClient Http
 
@@ -35,6 +35,8 @@ else
             </div>
         </div>
 
+       
+
          <div class="row">
             <div class="col-md-12 text-right">
                 <button type="submit" class="btn btn-success">@(IsEdit ? "Actualizar" : "Añadir")</button>
@@ -43,7 +45,19 @@ else
 
         @if (IsEdit)
         {
-            <CustomerLocation></CustomerLocation>
+            <CustomerLocation Locations="_customer.CustomerLocation"></CustomerLocation>
         }
     </EditForm>
+
+    <hr />
+    <h3>Testing Uploads </h3>
+
+    <div class="form-group row">
+        <label for="file" class="col-md-2 col-form-label">File:</label>
+        <div class="col-md-10">
+            <InputFile id="file" class="form-control" OnChange="@LoadFiles" />
+        </div>
+    </div>
+
+    <h1>@(_lastInputResponseMessage)</h1>
 }

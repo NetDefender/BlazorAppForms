@@ -6,10 +6,15 @@ namespace BlazorAppForms.Client.Pages
 {
     public sealed partial class CustomerLocation
     {
-        private List<CustomerLocationTransport> _locations;
-
         [CascadingParameter()]
-        public EditContext EditContext
+        public EditContext? EditContext
+        {
+            get;
+            set;
+        }
+
+        [Parameter]
+        public List<CustomerLocationTransport>? Locations
         {
             get;
             set;
@@ -17,16 +22,18 @@ namespace BlazorAppForms.Client.Pages
 
         public override async Task SetParametersAsync(ParameterView parameters)
         {
-            var oldEditContext = EditContext;
+            EditContext? oldEditContext = EditContext;
             parameters.SetParameterProperties(this);
-            _locations = ((CustomerTransport)EditContext.Model).CustomerLocation;
             if (oldEditContext != EditContext)
             {
                 if (oldEditContext != null)
                 {
                     oldEditContext.OnFieldChanged -= EditContext_OnFieldChanged;
                 }
-                EditContext.OnFieldChanged += EditContext_OnFieldChanged;
+                if (EditContext != null)
+                {
+                    EditContext.OnFieldChanged += EditContext_OnFieldChanged;
+                }
             }
             await base.SetParametersAsync(ParameterView.Empty);
         }
